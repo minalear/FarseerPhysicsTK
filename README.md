@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Farseer Physics Engine
 
 ## OpenTK port
@@ -31,4 +30,3 @@ We have tons of features!
 =======
 # FarseerPhysicsTK
 High performance 2D collision detection system with realistic physics responses targeting the OpenTK library.
->>>>>>> 64c5834169ab6c86f592d01cf4c6c28ce4ad99df
