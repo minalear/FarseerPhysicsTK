@@ -99,9 +99,9 @@ namespace FarseerPhysics.Dynamics.Joints
                 LocalAnchorB = BodyB.GetLocalPoint(anchorB);
 
                 Vector2 dA = anchorA - worldAnchorA;
-                LengthA = dA.Length();
+                LengthA = dA.Length;
                 Vector2 dB = anchorB - worldAnchorB;
-                LengthB = dB.Length();
+                LengthB = dB.Length;
             }
             else
             {
@@ -109,9 +109,9 @@ namespace FarseerPhysics.Dynamics.Joints
                 LocalAnchorB = anchorB;
 
                 Vector2 dA = anchorA - BodyA.GetLocalPoint(worldAnchorA);
-                LengthA = dA.Length();
+                LengthA = dA.Length;
                 Vector2 dB = anchorB - BodyB.GetLocalPoint(worldAnchorB);
-                LengthB = dB.Length();
+                LengthB = dB.Length;
             }
 
             Debug.Assert(ratio != 0.0f);
@@ -166,7 +166,7 @@ namespace FarseerPhysics.Dynamics.Joints
                 Vector2 p = BodyA.GetWorldPoint(LocalAnchorA);
                 Vector2 s = WorldAnchorA;
                 Vector2 d = p - s;
-                return d.Length();
+                return d.Length;
             }
         }
 
@@ -180,7 +180,7 @@ namespace FarseerPhysics.Dynamics.Joints
                 Vector2 p = BodyB.GetWorldPoint(LocalAnchorB);
                 Vector2 s = WorldAnchorB;
                 Vector2 d = p - s;
-                return d.Length();
+                return d.Length;
             }
         }
 
@@ -234,8 +234,8 @@ namespace FarseerPhysics.Dynamics.Joints
             _uA = cA + _rA - WorldAnchorA;
             _uB = cB + _rB - WorldAnchorB;
 
-            float lengthA = _uA.Length();
-            float lengthB = _uB.Length();
+            float lengthA = _uA.Length;
+            float lengthB = _uB.Length;
 
             if (lengthA > 10.0f * Settings.LinearSlop)
             {
@@ -337,8 +337,8 @@ namespace FarseerPhysics.Dynamics.Joints
             Vector2 uA = cA + rA - WorldAnchorA;
             Vector2 uB = cB + rB - WorldAnchorB;
 
-            float lengthA = uA.Length();
-            float lengthB = uB.Length();
+            float lengthA = uA.Length;
+            float lengthB = uB.Length;
 
             if (lengthA > 10.0f * Settings.LinearSlop)
             {

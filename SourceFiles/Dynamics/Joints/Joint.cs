@@ -230,7 +230,7 @@ namespace FarseerPhysics.Dynamics.Joints
             if (!Enabled)
                 return;
 
-            float jointErrorSquared = GetReactionForce(invDt).LengthSquared();
+            float jointErrorSquared = GetReactionForce(invDt).LengthSquared;
 
             if (Math.Abs(jointErrorSquared) <= _breakpointSquared)
                 return;

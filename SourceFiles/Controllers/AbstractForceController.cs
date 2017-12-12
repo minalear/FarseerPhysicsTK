@@ -1,5 +1,6 @@
 ﻿using System;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Common;
 using OpenTK;
 
 namespace FarseerPhysics.Controllers
@@ -210,7 +211,7 @@ namespace FarseerPhysics.Controllers
         protected float GetDecayMultiplier(Body body)
         {
             //TODO: Consider ForceType in distance calculation!
-            float distance = (body.Position - Position).Length();
+            float distance = body.Position.Distance(Position);
             switch (DecayMode)
             {
                 case DecayModes.None:

@@ -588,7 +588,7 @@ namespace FarseerPhysics.Dynamics.Joints
                 Vector2 rB = MathUtils.Mul(qB, LocalAnchorB - _localCenterB);
 
                 Vector2 C = cB + rB - cA - rA;
-                positionError = C.Length();
+                positionError = C.Length;
 
                 float mA = _invMassA, mB = _invMassB;
                 float iA = _invIA, iB = _invIB;

@@ -192,7 +192,7 @@ namespace FarseerPhysics.Common
                 // relative time
                 float lt = (time - _deltaT * p) / _deltaT;
 
-                temp = Vector2.CatmullRom(ControlPoints[p0], ControlPoints[p1], ControlPoints[p2], ControlPoints[p3], lt);
+                temp = MathHelper.CatmullRom(ControlPoints[p0], ControlPoints[p1], ControlPoints[p2], ControlPoints[p3], lt);
 
                 RemoveAt(ControlPoints.Count - 1);
             }
@@ -217,7 +217,7 @@ namespace FarseerPhysics.Common
                 // relative time
                 float lt = (time - _deltaT * p) / _deltaT;
 
-                temp = Vector2.CatmullRom(ControlPoints[p0], ControlPoints[p1], ControlPoints[p2], ControlPoints[p3], lt);
+                temp = MathHelper.CatmullRom(ControlPoints[p0], ControlPoints[p1], ControlPoints[p2], ControlPoints[p3], lt);
             }
 
             return temp;

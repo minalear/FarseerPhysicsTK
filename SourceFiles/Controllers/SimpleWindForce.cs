@@ -49,7 +49,7 @@ namespace FarseerPhysics.Controllers
 
                         forceVector = Direction;
 
-                        if (forceVector.Length() == 0)
+                        if (forceVector.Length == 0)
                             forceVector = new Vector2(0, 1);
                     }
 

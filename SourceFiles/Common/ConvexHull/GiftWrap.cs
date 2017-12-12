@@ -60,7 +60,7 @@ namespace FarseerPhysics.Common.ConvexHull
                     }
 
                     // Collinearity check
-                    if (c == 0.0f && v.LengthSquared() > r.LengthSquared())
+                    if (c == 0.0f && v.LengthSquared > r.LengthSquared)
                     {
                         ie = j;
                     }

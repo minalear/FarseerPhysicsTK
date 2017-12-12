@@ -346,7 +346,7 @@ namespace FarseerPhysics.Dynamics.Joints
             {
                 Vector2 C1 = cB + rB - cA - rA;
 
-                positionError = C1.Length();
+                positionError = C1.Length;
                 angularError = 0.0f;
 
                 Vector2 P = -K.Solve22(C1);
@@ -362,7 +362,7 @@ namespace FarseerPhysics.Dynamics.Joints
                 Vector2 C1 = cB + rB - cA - rA;
                 float C2 = aB - aA - ReferenceAngle;
 
-                positionError = C1.Length();
+                positionError = C1.Length;
                 angularError = Math.Abs(C2);
 
                 Vector3 C = new Vector3(C1.X, C1.Y, C2);

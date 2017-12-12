@@ -92,7 +92,7 @@ namespace FarseerPhysics.Dynamics.Joints
 
             //FPE feature: Setting default MaxLength
             Vector2 d = WorldAnchorB - WorldAnchorA;
-            MaxLength = d.Length();
+            MaxLength = d.Length;
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace FarseerPhysics.Dynamics.Joints
             _rB = MathUtils.Mul(qB, LocalAnchorB - _localCenterB);
             _u = cB + _rB - cA - _rA;
 
-            _length = _u.Length();
+            _length = _u.Length;
 
             float C = _length - MaxLength;
             if (C > 0.0f)
@@ -267,7 +267,7 @@ namespace FarseerPhysics.Dynamics.Joints
             Vector2 rB = MathUtils.Mul(qB, LocalAnchorB - _localCenterB);
             Vector2 u = cB + rB - cA - rA;
 
-            float length = u.Length(); u.Normalize();
+            float length = u.Length; u.Normalize();
             float C = length - MaxLength;
 
             C = MathUtils.Clamp(C, 0.0f, Settings.MaxLinearCorrection);

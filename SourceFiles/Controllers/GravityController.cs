@@ -56,7 +56,7 @@ namespace FarseerPhysics.Controllers
                         continue;
 
                     Vector2 d = controllerBody.Position - worldBody.Position;
-                    float r2 = d.LengthSquared();
+                    float r2 = d.LengthSquared;
 
                     if (r2 <= Settings.Epsilon || r2 > MaxRadius * MaxRadius || r2 < MinRadius * MinRadius)
                         continue;
@@ -77,7 +77,7 @@ namespace FarseerPhysics.Controllers
                 foreach (Vector2 point in Points)
                 {
                     Vector2 d = point - worldBody.Position;
-                    float r2 = d.LengthSquared();
+                    float r2 = d.LengthSquared;
 
                     if (r2 <= Settings.Epsilon || r2 > MaxRadius * MaxRadius || r2 < MinRadius * MinRadius)
                         continue;

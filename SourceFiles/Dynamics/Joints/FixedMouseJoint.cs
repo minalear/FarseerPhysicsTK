@@ -240,9 +240,9 @@ namespace FarseerPhysics.Dynamics.Joints
             Vector2 oldImpulse = _impulse;
             _impulse += impulse;
             float maxImpulse = data.step.dt * MaxForce;
-            if (_impulse.LengthSquared() > maxImpulse * maxImpulse)
+            if (_impulse.LengthSquared > maxImpulse * maxImpulse)
             {
-                _impulse *= maxImpulse / _impulse.Length();
+                _impulse *= maxImpulse / _impulse.Length;
             }
             impulse = _impulse - oldImpulse;
 

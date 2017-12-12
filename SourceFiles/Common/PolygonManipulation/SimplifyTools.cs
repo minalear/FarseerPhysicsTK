@@ -216,7 +216,7 @@ namespace FarseerPhysics.Common.PolygonManipulation
                 Vector2 next = vertices.NextVertex(i);
 
                 //If they are closer than the distance, continue
-                if ((next - current).LengthSquared() <= distance2)
+                if ((next - current).LengthSquared <= distance2)
                     continue;
 
                 simplified.Add(current);

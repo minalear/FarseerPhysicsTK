@@ -30,8 +30,9 @@ SOFTWARE.
 #endregion License
 
 using System;
+using OpenTK;
 
-namespace Microsoft.Xna.Framework
+namespace FarseerPhysics.Common
 {
     public static class MathHelper
     {
@@ -48,6 +49,12 @@ namespace Microsoft.Xna.Framework
             return value1 + (value2 - value1)*amount1 + (value3 - value1)*amount2;
         }
 
+        public static Vector2 CatmullRom(Vector2 value1, Vector2 value2, Vector2 value3, Vector2 value4, float amount)
+        {
+            return new Vector2(
+                CatmullRom(value1.X, value2.X, value3.X, value4.X, amount),
+                CatmullRom(value1.Y, value2.Y, value3.Y, value4.Y, amount));
+        }
         public static float CatmullRom(float value1, float value2, float value3, float value4, float amount)
         {
             // Using formula from http://www.mvps.org/directx/articles/catmull/

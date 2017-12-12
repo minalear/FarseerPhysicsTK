@@ -395,7 +395,7 @@ namespace FarseerPhysics.Collision
                     return 0.0f;
 
                 case 2:
-                    return (V[0].W - V[1].W).Length();
+                    return (V[0].W - V[1].W).Length;
 
                 case 3:
                     return MathUtils.Cross(V[1].W - V[0].W, V[2].W - V[0].W);
@@ -704,7 +704,7 @@ namespace FarseerPhysics.Collision
                 Vector2 d = simplex.GetSearchDirection();
 
                 // Ensure the search direction is numerically fit.
-                if (d.LengthSquared() < Settings.Epsilon * Settings.Epsilon)
+                if (d.LengthSquared < Settings.Epsilon * Settings.Epsilon)
                 {
                     // The origin is probably contained by a line segment
                     // or triangle. Thus the shapes are overlapped.
@@ -757,7 +757,7 @@ namespace FarseerPhysics.Collision
 
             // Prepare output.
             simplex.GetWitnessPoints(out output.PointA, out output.PointB);
-            output.Distance = (output.PointA - output.PointB).Length();
+            output.Distance = output.PointA.Distance(output.PointB);
             output.Iterations = iter;
 
             // Cache the simplex.

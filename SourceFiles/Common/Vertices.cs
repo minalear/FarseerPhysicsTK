@@ -427,7 +427,7 @@ namespace FarseerPhysics.Common
             {
                 int next = i + 1 < Count ? i + 1 : 0;
                 Vector2 edge = this[next] - this[i];
-                if (edge.LengthSquared() <= Settings.Epsilon*Settings.Epsilon)
+                if (edge.LengthSquared <= Settings.Epsilon*Settings.Epsilon)
                 {
                     return PolygonError.SideTooSmall;
                 }
@@ -550,7 +550,7 @@ namespace FarseerPhysics.Common
         {
             // Transform main polygon
             for (int i = 0; i < Count; i++)
-                this[i] = Vector2.Transform(this[i], transform);
+                this[i] = Vector2.Transform(this[i], Quaternion.FromMatrix(transform));
 
             // Transform holes
             if (Holes != null && Holes.Count > 0)
@@ -558,7 +558,8 @@ namespace FarseerPhysics.Common
                 for (int i = 0; i < Holes.Count; i++)
                 {
                     Vector2[] temp = Holes[i].ToArray();
-                    Vector2.Transform(temp, ref transform, temp);
+                    //Vector2.Transform(temp, ref transform, temp);
+                    //TODO: Original Vector2.Transform throws a NotImplementedException
 
                     Holes[i] = new Vertices(temp);
                 }

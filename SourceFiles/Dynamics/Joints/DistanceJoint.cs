@@ -95,13 +95,13 @@ namespace FarseerPhysics.Dynamics.Joints
             {
                 LocalAnchorA = bodyA.GetLocalPoint(ref anchorA);
                 LocalAnchorB = bodyB.GetLocalPoint(ref anchorB);
-                Length = (anchorB - anchorA).Length();
+                Length = anchorB.Distance(anchorA);
             }
             else
             {
                 LocalAnchorA = anchorA;
                 LocalAnchorB = anchorB;
-                Length = (BodyB.GetWorldPoint(ref anchorB) - BodyA.GetWorldPoint(ref anchorA)).Length();
+                Length = BodyB.GetWorldPoint(ref anchorB).Distance(BodyA.GetWorldPoint(ref anchorA));
             }
         }
 
@@ -194,7 +194,7 @@ namespace FarseerPhysics.Dynamics.Joints
             _u = cB + _rB - cA - _rA;
 
             // Handle singularity.
-            float length = _u.Length();
+            float length = _u.Length;
             if (length > Settings.LinearSlop)
             {
                 _u *= 1.0f / length;
@@ -308,7 +308,7 @@ namespace FarseerPhysics.Dynamics.Joints
             Vector2 rB = MathUtils.Mul(qB, LocalAnchorB - _localCenterB);
             Vector2 u = cB + rB - cA - rA;
 
-            float length = u.Length(); u.Normalize();
+            float length = u.Length; u.Normalize();
             float C = length - Length;
             C = MathUtils.Clamp(C, -Settings.MaxLinearCorrection, Settings.MaxLinearCorrection);
 

@@ -106,7 +106,7 @@ namespace FarseerPhysics.Collision.Shapes
                 {
                     int next = i + 1 < _vertices.Count ? i + 1 : 0;
                     Vector2 edge = _vertices[next] - _vertices[i];
-                    Debug.Assert(edge.LengthSquared() > Settings.Epsilon * Settings.Epsilon);
+                    Debug.Assert(edge.LengthSquared > Settings.Epsilon * Settings.Epsilon);
 
                     //FPE optimization: Normals.Add(MathHelper.Cross(edge, 1.0f));
                     Vector2 temp = new Vector2(edge.Y, -edge.X);

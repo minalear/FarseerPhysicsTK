@@ -341,7 +341,7 @@ namespace FarseerPhysics.Collision
             Vector2 p1 = input.Point1;
             Vector2 p2 = input.Point2;
             Vector2 r = p2 - p1;
-            Debug.Assert(r.LengthSquared() > 0.0f);
+            Debug.Assert(r.LengthSquared > 0.0f);
             r.Normalize();
 
             // v is perpendicular to the segment.
@@ -356,8 +356,8 @@ namespace FarseerPhysics.Collision
             AABB segmentAABB = new AABB();
             {
                 Vector2 t = p1 + maxFraction * (p2 - p1);
-                Vector2.Min(ref p1, ref t, out segmentAABB.LowerBound);
-                Vector2.Max(ref p1, ref t, out segmentAABB.UpperBound);
+                segmentAABB.LowerBound = Vector2.Min(p1, t);
+                segmentAABB.UpperBound = Vector2.Max(p1, t);
             }
 
             _raycastStack.Clear();

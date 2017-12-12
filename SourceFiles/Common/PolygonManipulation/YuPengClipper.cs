@@ -59,62 +59,61 @@ namespace FarseerPhysics.Common.PolygonManipulation
     /// Outer contours are ordered counter clockwise, holes are ordered clockwise.</returns>
     private static List<Vertices> Execute(Vertices subject, Vertices clip, PolyClipType clipType, out PolyClipError error)
     {
-      Debug.Assert(subject.IsSimple() && clip.IsSimple(), "Non simple input!", "Input polygons must be simple (cannot intersect themselves).");
+        Debug.Assert(subject.IsSimple() && clip.IsSimple(), "Non simple input!", "Input polygons must be simple (cannot intersect themselves).");
 
-      // Copy polygons
-      Vertices slicedSubject;
-      Vertices slicedClip;
-      // Calculate the intersection and touch points between
-      // subject and clip and add them to both
-      CalculateIntersections(subject, clip, out slicedSubject, out slicedClip);
+        // Copy polygons
+        Vertices slicedSubject;
+        Vertices slicedClip;
+        // Calculate the intersection and touch points between
+        // subject and clip and add them to both
+        CalculateIntersections(subject, clip, out slicedSubject, out slicedClip);
 
-      // Translate polygons into upper right quadrant
-      // as the algorithm depends on it
-      Vector2 lbSubject = subject.GetAABB().LowerBound;
-      Vector2 lbClip = clip.GetAABB().LowerBound;
-      Vector2 translate;
-      Vector2.Min(ref lbSubject, ref lbClip, out translate);
-      translate = Vector2.One - translate;
-      if (translate != Vector2.Zero)
-      {
+        // Translate polygons into upper right quadrant
+        // as the algorithm depends on it
+        Vector2 lbSubject = subject.GetAABB().LowerBound;
+        Vector2 lbClip = clip.GetAABB().LowerBound;
+        Vector2 translate = Vector2.Min(lbSubject, lbClip);
+        translate = Vector2.One - translate;
+        if (translate != Vector2.Zero)
+        {
         slicedSubject.Translate(ref translate);
         slicedClip.Translate(ref translate);
-      }
+        }
 
-      // Enforce counterclockwise contours
-      slicedSubject.ForceCounterClockWise();
-      slicedClip.ForceCounterClockWise();
+        // Enforce counterclockwise contours
+        slicedSubject.ForceCounterClockWise();
+        slicedClip.ForceCounterClockWise();
 
-      List<Edge> subjectSimplices;
-      List<float> subjectCoeff;
-      List<Edge> clipSimplices;
-      List<float> clipCoeff;
-      // Build simplical chains from the polygons and calculate the
-      // the corresponding coefficients
-      CalculateSimplicalChain(slicedSubject, out subjectCoeff, out subjectSimplices);
-      CalculateSimplicalChain(slicedClip, out clipCoeff, out clipSimplices);
+        List<Edge> subjectSimplices;
+        List<float> subjectCoeff;
+        List<Edge> clipSimplices;
+        List<float> clipCoeff;
+        // Build simplical chains from the polygons and calculate the
+        // the corresponding coefficients
+        CalculateSimplicalChain(slicedSubject, out subjectCoeff, out subjectSimplices);
+        CalculateSimplicalChain(slicedClip, out clipCoeff, out clipSimplices);
 
-      List<Edge> resultSimplices;
+        List<Edge> resultSimplices;
 
-      // Determine the characteristics function for all non-original edges
-      // in subject and clip simplical chain and combine the edges contributing
-      // to the result, depending on the clipType
-      CalculateResultChain(subjectCoeff, subjectSimplices, clipCoeff, clipSimplices, clipType,
-                           out resultSimplices);
+        // Determine the characteristics function for all non-original edges
+        // in subject and clip simplical chain and combine the edges contributing
+        // to the result, depending on the clipType
+        CalculateResultChain(subjectCoeff, subjectSimplices, clipCoeff, clipSimplices, clipType,
+                            out resultSimplices);
 
-      List<Vertices> result;
-      // Convert result chain back to polygon(s)
-      error = BuildPolygonsFromChain(resultSimplices, out result);
+        List<Vertices> result;
+        // Convert result chain back to polygon(s)
+        error = BuildPolygonsFromChain(resultSimplices, out result);
 
-      // Reverse the polygon translation from the beginning
-      // and remove collinear points from output
-      translate *= -1f;
-      for (int i = 0; i < result.Count; ++i)
-      {
+        // Reverse the polygon translation from the beginning
+        // and remove collinear points from output
+        translate *= -1f;
+        for (int i = 0; i < result.Count; ++i)
+        {
         result[i].Translate(ref translate);
         SimplifyTools.CollinearSimplify(result[i]);
-      }
-      return result;
+        }
+        return result;
     }
 
     /// <summary>
@@ -181,7 +180,7 @@ namespace FarseerPhysics.Common.PolygonManipulation
       {
         int iNext = slicedPoly1.NextIndex(i);
         //If they are closer than the distance remove vertex
-        if ((slicedPoly1[iNext] - slicedPoly1[i]).LengthSquared() <= ClipperEpsilonSquared)
+        if ((slicedPoly1[iNext] - slicedPoly1[i]).LengthSquared <= ClipperEpsilonSquared)
         {
           slicedPoly1.RemoveAt(i);
           --i;
@@ -191,7 +190,7 @@ namespace FarseerPhysics.Common.PolygonManipulation
       {
         int iNext = slicedPoly2.NextIndex(i);
         //If they are closer than the distance remove vertex
-        if ((slicedPoly2[iNext] - slicedPoly2[i]).LengthSquared() <= ClipperEpsilonSquared)
+        if ((slicedPoly2[iNext] - slicedPoly2[i]).LengthSquared <= ClipperEpsilonSquared)
         {
           slicedPoly2.RemoveAt(i);
           --i;
@@ -399,7 +398,7 @@ namespace FarseerPhysics.Common.PolygonManipulation
     /// <remarks>Used by method <c>CalculateIntersections()</c>.</remarks>
     private static float GetAlpha(Vector2 start, Vector2 end, Vector2 point)
     {
-      return (point - start).LengthSquared() / (end - start).LengthSquared();
+      return (point - start).LengthSquared / (end - start).LengthSquared;
     }
 
     /// <summary>
@@ -452,7 +451,7 @@ namespace FarseerPhysics.Common.PolygonManipulation
 
     private static bool VectorEqual(Vector2 vec1, Vector2 vec2)
     {
-      return (vec2 - vec1).LengthSquared() <= ClipperEpsilonSquared;
+      return (vec2 - vec1).LengthSquared <= ClipperEpsilonSquared;
     }
 
     #region Nested type: Edge

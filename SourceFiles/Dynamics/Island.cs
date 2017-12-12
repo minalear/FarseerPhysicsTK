@@ -203,7 +203,7 @@ namespace FarseerPhysics.Dynamics
                 Vector2 translation = h * v;
                 if (Vector2.Dot(translation, translation) > Settings.MaxTranslationSquared)
                 {
-                    float ratio = Settings.MaxTranslation / translation.Length();
+                    float ratio = Settings.MaxTranslation / translation.Length;
                     v *= ratio;
                 }
 
@@ -371,7 +371,7 @@ namespace FarseerPhysics.Dynamics
                 Vector2 translation = h * v;
                 if (Vector2.Dot(translation, translation) > Settings.MaxTranslationSquared)
                 {
-                    float ratio = Settings.MaxTranslation / translation.Length();
+                    float ratio = Settings.MaxTranslation / translation.Length;
                     v *= ratio;
                 }
 

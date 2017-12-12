@@ -243,7 +243,7 @@ namespace FarseerPhysics.Dynamics.Joints
 
                 float maxImpulse = h * MaxForce;
 
-                if (_linearImpulse.LengthSquared() > maxImpulse * maxImpulse)
+                if (_linearImpulse.LengthSquared > maxImpulse * maxImpulse)
                 {
                     _linearImpulse.Normalize();
                     _linearImpulse *= maxImpulse;
