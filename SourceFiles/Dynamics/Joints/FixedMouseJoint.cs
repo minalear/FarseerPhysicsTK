@@ -194,7 +194,7 @@ namespace FarseerPhysics.Dynamics.Joints
 
             _beta = h * k * _gamma;
 
-            // Compute the effective mass Matrix3.
+            // Compute the effective mass Matrix.
             _rA = MathUtils.Mul(qA, LocalAnchorA - _localCenterA);
             // K    = [(1/m1 + 1/m2) * eye(2) - skew(r1) * invI1 * skew(r1) - skew(r2) * invI2 * skew(r2)]
             //      = [1/m1+1/m2     0    ] + invI1 * [r1.Y*r1.Y -r1.X*r1.Y] + invI2 * [r1.Y*r1.Y -r1.X*r1.Y]

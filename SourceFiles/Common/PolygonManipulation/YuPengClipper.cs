@@ -72,7 +72,7 @@ namespace FarseerPhysics.Common.PolygonManipulation
         // as the algorithm depends on it
         Vector2 lbSubject = subject.GetAABB().LowerBound;
         Vector2 lbClip = clip.GetAABB().LowerBound;
-        Vector2 translate = Vector2.Min(lbSubject, lbClip);
+        Vector2 translate = Vector2.ComponentMin(lbSubject, lbClip);
         translate = Vector2.One - translate;
         if (translate != Vector2.Zero)
         {

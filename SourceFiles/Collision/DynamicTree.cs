@@ -356,8 +356,8 @@ namespace FarseerPhysics.Collision
             AABB segmentAABB = new AABB();
             {
                 Vector2 t = p1 + maxFraction * (p2 - p1);
-                segmentAABB.LowerBound = Vector2.Min(p1, t);
-                segmentAABB.UpperBound = Vector2.Max(p1, t);
+                segmentAABB.LowerBound = Vector2.ComponentMin(p1, t);
+                segmentAABB.UpperBound = Vector2.ComponentMax(p1, t);
             }
 
             _raycastStack.Clear();
@@ -408,8 +408,8 @@ namespace FarseerPhysics.Collision
                         // Update segment bounding box.
                         maxFraction = value;
                         Vector2 t = p1 + maxFraction * (p2 - p1);
-                        segmentAABB.LowerBound = Vector2.Min(p1, t);
-                        segmentAABB.UpperBound = Vector2.Max(p1, t);
+                        segmentAABB.LowerBound = Vector2.ComponentMin(p1, t);
+                        segmentAABB.UpperBound = Vector2.ComponentMax(p1, t);
                     }
                 }
                 else

@@ -317,8 +317,8 @@ namespace FarseerPhysics.Collision.Shapes
             for (int i = 1; i < Vertices.Count; ++i)
             {
                 Vector2 v = MathUtils.Mul(ref transform, Vertices[i]);
-                lower = Vector2.Min(lower, v);
-                upper = Vector2.Max(upper, v);
+                lower = Vector2.ComponentMin(lower, v);
+                upper = Vector2.ComponentMax(upper, v);
             }
 
             Vector2 r = new Vector2(Radius, Radius);

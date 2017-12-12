@@ -108,6 +108,13 @@ namespace FarseerPhysics.Common
             return new Vector2(x, y);
         }
 
+        public static Vector2 Min(Vector2 value1, Vector2 value2)
+        {
+            return new Vector2(
+                MathHelper.Min(value1.X, value2.X),
+                MathHelper.Min(value1.Y, value2.Y));
+        }
+
         // A^T * B
         public static void MulT(ref Mat22 A, ref Mat22 B, out Mat22 C)
         {
@@ -118,7 +125,7 @@ namespace FarseerPhysics.Common
             C.ey.Y = A.ey.X * B.ey.X + A.ey.Y * B.ey.Y;
         }
 
-        /// Multiply a Matrix3 times a vector.
+        /// Multiply a Matrix times a vector.
         public static Vector3 Mul(Mat33 A, Vector3 v)
         {
             return v.X * A.ex + v.Y * A.ey + v.Z * A.ez;
@@ -150,7 +157,7 @@ namespace FarseerPhysics.Common
             b = tmp;
         }
 
-        /// Multiply a Matrix3 times a vector.
+        /// Multiply a Matrix times a vector.
         public static Vector2 Mul22(Mat33 A, Vector2 v)
         {
             return new Vector2(A.ex.X * v.X + A.ey.X * v.Y, A.ex.Y * v.X + A.ey.Y * v.Y);
@@ -272,7 +279,7 @@ namespace FarseerPhysics.Common
 
         public static Vector2 Clamp(Vector2 a, Vector2 low, Vector2 high)
         {
-            return Vector2.Max(low, Vector2.Min(a, high));
+            return Vector2.ComponentMax(low, Vector2.ComponentMin(a, high));
         }
 
         public static void Cross(ref Vector2 a, ref Vector2 b, out float c)
@@ -404,14 +411,14 @@ namespace FarseerPhysics.Common
     }
 
     /// <summary>
-    /// A 2-by-2 Matrix3. Stored in column-major order.
+    /// A 2-by-2 Matrix. Stored in column-major order.
     /// </summary>
     public struct Mat22
     {
         public Vector2 ex, ey;
 
         /// <summary>
-        /// Construct this Matrix3 using columns.
+        /// Construct this Matrix using columns.
         /// </summary>
         /// <param name="c1">The c1.</param>
         /// <param name="c2">The c2.</param>
@@ -422,7 +429,7 @@ namespace FarseerPhysics.Common
         }
 
         /// <summary>
-        /// Construct this Matrix3 using scalars.
+        /// Construct this Matrix using scalars.
         /// </summary>
         /// <param name="a11">The a11.</param>
         /// <param name="a12">The a12.</param>
@@ -457,7 +464,7 @@ namespace FarseerPhysics.Common
         }
 
         /// <summary>
-        /// Initialize this Matrix3 using columns.
+        /// Initialize this Matrix using columns.
         /// </summary>
         /// <param name="c1">The c1.</param>
         /// <param name="c2">The c2.</param>
@@ -468,7 +475,7 @@ namespace FarseerPhysics.Common
         }
 
         /// <summary>
-        /// Set this to the identity Matrix3.
+        /// Set this to the identity Matrix.
         /// </summary>
         public void SetIdentity()
         {
@@ -479,7 +486,7 @@ namespace FarseerPhysics.Common
         }
 
         /// <summary>
-        /// Set this Matrix3 to all zeros.
+        /// Set this Matrix to all zeros.
         /// </summary>
         public void SetZero()
         {
@@ -515,14 +522,14 @@ namespace FarseerPhysics.Common
     }
 
     /// <summary>
-    /// A 3-by-3 Matrix3. Stored in column-major order.
+    /// A 3-by-3 Matrix. Stored in column-major order.
     /// </summary>
     public struct Mat33
     {
         public Vector3 ex, ey, ez;
 
         /// <summary>
-        /// Construct this Matrix3 using columns.
+        /// Construct this Matrix using columns.
         /// </summary>
         /// <param name="c1">The c1.</param>
         /// <param name="c2">The c2.</param>
@@ -535,7 +542,7 @@ namespace FarseerPhysics.Common
         }
 
         /// <summary>
-        /// Set this Matrix3 to all zeros.
+        /// Set this Matrix to all zeros.
         /// </summary>
         public void SetZero()
         {
@@ -564,7 +571,7 @@ namespace FarseerPhysics.Common
         /// <summary>
         /// Solve A * x = b, where b is a column vector. This is more efficient
         /// than computing the inverse in one-shot cases. Solve only the upper
-        /// 2-by-2 Matrix3 equation.
+        /// 2-by-2 Matrix equation.
         /// </summary>
         /// <param name="b">The b.</param>
         /// <returns></returns>
@@ -581,8 +588,8 @@ namespace FarseerPhysics.Common
             return new Vector2(det * (a22 * b.X - a12 * b.Y), det * (a11 * b.Y - a21 * b.X));
         }
 
-        /// Get the inverse of this Matrix3 as a 2-by-2.
-        /// Returns the zero Matrix3 if singular.
+        /// Get the inverse of this Matrix as a 2-by-2.
+        /// Returns the zero Matrix if singular.
         public void GetInverse22(ref Mat33 M)
         {
             float a = ex.X, b = ey.X, c = ex.Y, d = ey.Y;
@@ -597,8 +604,8 @@ namespace FarseerPhysics.Common
             M.ez.X = 0.0f; M.ez.Y = 0.0f; M.ez.Z = 0.0f;
         }
 
-        /// Get the symmetric inverse of this Matrix3 as a 3-by-3.
-        /// Returns the zero Matrix3 if singular.
+        /// Get the symmetric inverse of this Matrix as a 3-by-3.
+        /// Returns the zero Matrix if singular.
         public void GetSymInverse33(ref Mat33 M)
         {
             float det = MathUtils.Dot(ex, MathUtils.Cross(ey, ez));
@@ -708,7 +715,7 @@ namespace FarseerPhysics.Common
         public Rot q;
 
         /// <summary>
-        /// Initialize using a position vector and a rotation Matrix3.
+        /// Initialize using a position vector and a rotation Matrix.
         /// </summary>
         /// <param name="position">The position.</param>
         /// <param name="rotation">The r.</param>

@@ -196,7 +196,7 @@ namespace FarseerPhysics.Dynamics.Joints
             Rot qA = new Rot(aA);
             Rot qB = new Rot(aB);
 
-            // Compute the effective mass Matrix3.
+            // Compute the effective mass Matrix.
             _rA = MathUtils.Mul(qA, -_localCenterA);
             _rB = MathUtils.Mul(qB, -_localCenterB);
 

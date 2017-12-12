@@ -101,7 +101,8 @@ namespace FarseerPhysics.Dynamics.Joints
             {
                 LocalAnchorA = anchorA;
                 LocalAnchorB = anchorB;
-                Length = BodyB.GetWorldPoint(ref anchorB).Distance(BodyA.GetWorldPoint(ref anchorA));
+                //Length = BodyB.GetWorldPoint(ref anchorB).Distance(BodyA.GetWorldPoint(ref anchorA));
+                Length = (BodyB.GetWorldPoint(ref anchorB) - BodyA.GetWorldPoint(ref anchorA)).Length;
             }
         }
 
@@ -208,7 +209,7 @@ namespace FarseerPhysics.Dynamics.Joints
             float crBu = MathUtils.Cross(_rB, _u);
             float invMass = _invMassA + _invIA * crAu * crAu + _invMassB + _invIB * crBu * crBu;
 
-            // Compute the effective mass Matrix3.
+            // Compute the effective mass Matrix.
             _mass = invMass != 0.0f ? 1.0f / invMass : 0.0f;
 
             if (Frequency > 0.0f)

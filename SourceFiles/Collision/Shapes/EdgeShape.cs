@@ -204,8 +204,8 @@ namespace FarseerPhysics.Collision.Shapes
             Vector2 v1 = MathUtils.Mul(ref transform, _vertex1);
             Vector2 v2 = MathUtils.Mul(ref transform, _vertex2);
 
-            Vector2 lower = Vector2.Min(v1, v2);
-            Vector2 upper = Vector2.Max(v1, v2);
+            Vector2 lower = Vector2.ComponentMin(v1, v2);
+            Vector2 upper = Vector2.ComponentMax(v1, v2);
 
             Vector2 r = new Vector2(Radius, Radius);
             aabb.LowerBound = lower - r;

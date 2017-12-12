@@ -13,6 +13,7 @@ namespace ExampleTwo
     public class ExampleTwo : GameWindow
     {
         private ShapeRenderer shapeRenderer;
+        private int counter = 0;
 
         private World world;
         private Body rocket;
@@ -39,17 +40,17 @@ namespace ExampleTwo
             world = new World(new Vector2(0f, 9.8f));
             boxes = new List<Body>();
 
-            //rocket = BodyFactory.CreateCapsule(world, 48f * pixelToUnit, 12f * pixelToUnit, 1f, new Vector2(400f, 225f));
+            rocket = BodyFactory.CreateCapsule(world, 48f * pixelToUnit, 12f * pixelToUnit, 1f, new Vector2(400f, 225f));
             rocket = BodyFactory.CreateCircle(world, 24f * pixelToUnit, 1f);
             rocket.BodyType = BodyType.Dynamic;
             rocket.Position = new Vector2(400f, 225f) * pixelToUnit;
-            //rocket.FixedRotation = true;
+            rocket.FixedRotation = true;
+
+            rocketShape = ShapeConstructor.ConstructShapeFromBody(rocket);
 
             platform = BodyFactory.CreateRectangle(world, 800f * pixelToUnit, 800f * pixelToUnit, 1f);
             platform.BodyType = BodyType.Static;
             platform.Position = new Vector2(400f, 825f) * pixelToUnit;
-
-            rocketShape = ShapeConstructor.ConstructShapeFromBody(rocket);
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -107,8 +108,9 @@ namespace ExampleTwo
             Vector2 position = new Vector2((float)rng.NextDouble() * 800f, -100f) * pixelToUnit;
             Vector2 size = new Vector2(50f) * pixelToUnit;
 
-            Body box = BodyFactory.CreateRectangle(world, size.X, size.Y, 1f, position);
+            Body box = BodyFactory.CreateRectangle(world, size.X, size.Y, 1f);
             box.BodyType = BodyType.Dynamic;
+            box.Position = new Vector2(position.X, position.Y);
 
             boxes.Add(box);
         }

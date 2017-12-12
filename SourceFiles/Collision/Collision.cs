@@ -382,8 +382,8 @@ namespace FarseerPhysics.Collision
         /// <param name="aabb">The aabb.</param>
         public void Combine(ref AABB aabb)
         {
-            LowerBound = Vector2.Min(LowerBound, aabb.LowerBound);
-            UpperBound = Vector2.Max(UpperBound, aabb.UpperBound);
+            LowerBound = Vector2.ComponentMin(LowerBound, aabb.LowerBound);
+            UpperBound = Vector2.ComponentMax(UpperBound, aabb.UpperBound);
         }
 
         /// <summary>
@@ -393,8 +393,8 @@ namespace FarseerPhysics.Collision
         /// <param name="aabb2">The aabb2.</param>
         public void Combine(ref AABB aabb1, ref AABB aabb2)
         {
-            LowerBound = Vector2.Min(aabb1.LowerBound, aabb2.LowerBound);
-            UpperBound = Vector2.Max(aabb1.UpperBound, aabb2.UpperBound);
+            LowerBound = Vector2.ComponentMin(aabb1.LowerBound, aabb2.LowerBound);
+            UpperBound = Vector2.ComponentMax(aabb1.UpperBound, aabb2.UpperBound);
         }
 
         /// <summary>

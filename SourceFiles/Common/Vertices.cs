@@ -543,14 +543,16 @@ namespace FarseerPhysics.Common
         }
 
         /// <summary>
-        /// Transforms the polygon using the defined Matrix3.
+        /// Transforms the polygon using the defined Matrix.
         /// </summary>
-        /// <param name="transform">The Matrix3 to use as transformation.</param>
+        /// <param name="transform">The Matrix to use as transformation.</param>
         public void Transform(ref Matrix3 transform)
         {
             // Transform main polygon
             for (int i = 0; i < Count; i++)
+            {
                 this[i] = Vector2.Transform(this[i], Quaternion.FromMatrix(transform));
+            }
 
             // Transform holes
             if (Holes != null && Holes.Count > 0)

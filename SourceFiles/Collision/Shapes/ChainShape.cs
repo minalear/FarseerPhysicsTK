@@ -210,8 +210,8 @@ namespace FarseerPhysics.Collision.Shapes
             Vector2 v1 = MathUtils.Mul(ref transform, Vertices[i1]);
             Vector2 v2 = MathUtils.Mul(ref transform, Vertices[i2]);
 
-            aabb.LowerBound = Vector2.Min(v1, v2);
-            aabb.UpperBound = Vector2.Max(v1, v2);
+            aabb.LowerBound = Vector2.ComponentMin(v1, v2);
+            aabb.UpperBound = Vector2.ComponentMax(v1, v2);
         }
 
         protected override void ComputeProperties()
