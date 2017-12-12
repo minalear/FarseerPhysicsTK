@@ -27,6 +27,3 @@ We have tons of features!
 * Controllers (gravity, force generators)
 * Tools to decompose concave polygons, find convex hulls and boolean operations
 * Factories to simplify the creation of bodies
-=======
-# FarseerPhysicsTK
-High performance 2D collision detection system with realistic physics responses targeting the OpenTK library.
