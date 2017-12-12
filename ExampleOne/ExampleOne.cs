@@ -15,6 +15,7 @@ namespace ExampleOne
 
         private World world;
         private Body body01, body02;
+        private float[] body01Shape, body02Shape;
 
         //Conversion between Farseer units and screen pixels
         const float unitToPixel = 100f;
@@ -36,11 +37,15 @@ namespace ExampleOne
             body01.BodyType = BodyType.Dynamic;
             body01.Position = new Vector2(400f, 0f) * pixelToUnit;
 
+            body01Shape = ShapeConstructor.ConstructShapeFromBody(body01);
+
             size = new Vector2(800f, 50f);
             body02 = BodyFactory.CreateRectangle(world, size.X * pixelToUnit, size.Y * pixelToUnit, 1f);
             body02.BodyType = BodyType.Kinematic;
             body02.Position = new Vector2(400f, 225f) * pixelToUnit;
             body02.Rotation = MathHelper.PiOver6;
+
+            body02Shape = ShapeConstructor.ConstructShapeFromBody(body02);
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -52,17 +57,17 @@ namespace ExampleOne
             //Create matrix transforms based on the body's rotation and position
             Vector2 body01Position = (body01.Position * unitToPixel) - new Vector2(25f, 25f);
             shapeRenderer.SetTransform(
-                Matrix4.CreateTranslation(-body01Position.X - 25f, -body01Position.Y - 25f, 0f) *
-                Matrix4.CreateRotationZ(body01.Rotation) *
+                Matrix4.CreateRotationZ(body01.Rotation) * 
                 Matrix4.CreateTranslation(body01Position.X + 25f, body01Position.Y + 25f, 0f));
-            shapeRenderer.DrawRect(body01Position, new Vector2(50f), Color4.Black);
+            shapeRenderer.FillShape(body01Shape, Color4.Red);
+            shapeRenderer.DrawShape(body01Shape, Color4.Black);
 
             Vector2 body02Position = (body02.Position * unitToPixel) - new Vector2(400f, 25f);
             shapeRenderer.SetTransform(
-                Matrix4.CreateTranslation(-body02Position.X - 400f, -body02Position.Y - 25f, 0f) *
                 Matrix4.CreateRotationZ(body02.Rotation) *
                 Matrix4.CreateTranslation(body02Position.X + 400f, body02Position.Y + 25f, 0f));
-            shapeRenderer.DrawRect(body02Position, new Vector2(800f, 50f), Color4.Black);
+            shapeRenderer.FillShape(body02Shape, Color4.Blue);
+            shapeRenderer.DrawShape(body02Shape, Color4.Black);
             shapeRenderer.End();
 
             SwapBuffers();
