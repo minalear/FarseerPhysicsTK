@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using FarseerPhysics.Collision;
 using FarseerPhysics.Dynamics;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Common.PhysicsLogic
 {
@@ -42,7 +42,7 @@ namespace FarseerPhysics.Common.PhysicsLogic
             // Query the world for bodies within the radius.
             World.QueryAABB(fixture =>
             {
-                if (Vector2.Distance(fixture.Body.Position, pos) <= radius)
+                if (fixture.Body.Position.Distance(pos) <= radius)
                 {
                     if (!affectedBodies.Contains(fixture.Body))
                         affectedBodies.Add(fixture.Body);
@@ -62,7 +62,7 @@ namespace FarseerPhysics.Common.PhysicsLogic
             {
                 if (IsActiveOn(overlappingBody))
                 {
-                    float distance = Vector2.Distance(pos, overlappingBody.Position);
+                    float distance = pos.Distance(overlappingBody.Position);
                     float forcePercent = GetPercent(distance, radius);
 
                     Vector2 forceVector = pos - overlappingBody.Position;

@@ -150,12 +150,12 @@
     <Compile Include="Common\Decomposition\Seidel\XNode.cs" />
     <Compile Include="Common\Decomposition\Seidel\YNode.cs" />
     <Compile Include="Common\Decomposition\Triangulate.cs" />
+    <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\FixedArray.cs" />
     <Compile Include="Common\HashSet.cs" />
     <Compile Include="Common\LineTools.cs" />
     <Compile Include="Common\Math.cs" />
     <Compile Include="Common\MathHelper.cs" />
-    <Compile Include="Common\Matrix.cs" />
     <Compile Include="Common\Path.cs" />
     <Compile Include="Common\PathManager.cs" />
     <Compile Include="Common\PhysicsLogic\FilterData.cs" />
@@ -170,8 +170,6 @@
     <Compile Include="Common\TextureTools\MarchingSquares.cs" />
     <Compile Include="Common\TextureTools\Terrain.cs" />
     <Compile Include="Common\TextureTools\TextureConverter.cs" />
-    <Compile Include="Common\Vector2.cs" />
-    <Compile Include="Common\Vector3.cs" />
     <Compile Include="Common\Vertices.cs" />
     <Compile Include="Controllers\AbstractForceController.cs" />
     <Compile Include="Controllers\BuoyancyController.cs" />

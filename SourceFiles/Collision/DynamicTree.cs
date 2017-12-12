@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using FarseerPhysics.Common;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Collision
 {

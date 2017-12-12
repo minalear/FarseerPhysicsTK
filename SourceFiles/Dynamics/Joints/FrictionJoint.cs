@@ -21,7 +21,7 @@
 */
 
 using FarseerPhysics.Common;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Dynamics.Joints
 {
@@ -153,7 +153,7 @@ namespace FarseerPhysics.Dynamics.Joints
 
             Rot qA = new Rot(aA), qB = new Rot(aB);
 
-            // Compute the effective mass matrix.
+            // Compute the effective mass Matrix3.
             _rA = MathUtils.Mul(qA, LocalAnchorA - _localCenterA);
             _rB = MathUtils.Mul(qB, LocalAnchorB - _localCenterB);
 

@@ -25,7 +25,7 @@ using System.Diagnostics;
 using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics.Dynamics.Joints;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Dynamics
 {

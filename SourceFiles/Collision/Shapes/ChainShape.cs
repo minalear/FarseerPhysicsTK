@@ -22,7 +22,7 @@
 
 using System.Diagnostics;
 using FarseerPhysics.Common;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Collision.Shapes
 {
@@ -73,7 +73,7 @@ namespace FarseerPhysics.Collision.Shapes
                 Vector2 v2 = vertices[i];
 
                 // If the code crashes here, it means your vertices are too close together.
-                Debug.Assert(Vector2.DistanceSquared(v1, v2) > Settings.LinearSlop * Settings.LinearSlop);
+                Debug.Assert(v1.DistanceSquared(v2) > Settings.LinearSlop * Settings.LinearSlop);
             }
 
             Vertices = new Vertices(vertices);

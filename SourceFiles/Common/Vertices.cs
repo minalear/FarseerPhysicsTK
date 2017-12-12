@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using FarseerPhysics.Collision;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Common
 {
@@ -543,10 +543,10 @@ namespace FarseerPhysics.Common
         }
 
         /// <summary>
-        /// Transforms the polygon using the defined matrix.
+        /// Transforms the polygon using the defined Matrix3.
         /// </summary>
-        /// <param name="transform">The matrix to use as transformation.</param>
-        public void Transform(ref Matrix transform)
+        /// <param name="transform">The Matrix3 to use as transformation.</param>
+        public void Transform(ref Matrix3 transform)
         {
             // Transform main polygon
             for (int i = 0; i < Count; i++)

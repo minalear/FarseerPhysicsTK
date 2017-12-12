@@ -4,7 +4,7 @@ using System.Linq;
 using FarseerPhysics.Collision;
 using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics.Dynamics;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Common.PhysicsLogic
 {

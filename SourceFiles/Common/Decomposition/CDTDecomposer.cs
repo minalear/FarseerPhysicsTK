@@ -9,7 +9,7 @@ using FarseerPhysics.Common.Decomposition.CDT;
 using FarseerPhysics.Common.Decomposition.CDT.Delaunay;
 using FarseerPhysics.Common.Decomposition.CDT.Delaunay.Sweep;
 using FarseerPhysics.Common.Decomposition.CDT.Polygon;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Common.Decomposition
 {

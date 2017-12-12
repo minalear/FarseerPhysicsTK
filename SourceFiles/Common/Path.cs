@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Common
 {
@@ -118,11 +118,11 @@ namespace FarseerPhysics.Common
         /// <param name="value">The amount to rotate by in radians.</param>
         public void Rotate(float value)
         {
-            Matrix rotationMatrix;
-            Matrix.CreateRotationZ(value, out rotationMatrix);
+            Matrix3 rotationMatrix3;
+            Matrix3.CreateRotationZ(value, out rotationMatrix3);
 
             for (int i = 0; i < ControlPoints.Count; i++)
-                ControlPoints[i] = Vector2.Transform(ControlPoints[i], rotationMatrix);
+                ControlPoints[i] = Vector2.Transform(ControlPoints[i], Quaternion.FromMatrix(rotationMatrix3));
         }
 
         public override string ToString()
@@ -275,11 +275,11 @@ output = new Vector2();
 
             for (int i = 1; i < verts.Count; i++)
             {
-                length += Vector2.Distance(verts[i - 1], verts[i]);
+                length += verts[i - 1].Distance(verts[i]);
             }
 
             if (Closed)
-                length += Vector2.Distance(verts[ControlPoints.Count - 1], verts[0]);
+                length += verts[ControlPoints.Count - 1].Distance(verts[0]);
 
             return length;
         }
@@ -298,7 +298,7 @@ output = new Vector2();
             Vector2 end = GetPosition(t);
 
             // increment t until we are at half the distance
-            while (deltaLength * 0.5f >= Vector2.Distance(start, end))
+            while (deltaLength * 0.5f >= start.Distance(end))
             {
                 end = GetPosition(t);
                 t += 0.0001f;
@@ -315,10 +315,10 @@ output = new Vector2();
                 Vector2 normal = GetPositionNormal(t);
                 float angle = (float)Math.Atan2(normal.Y, normal.X);
 
-                verts.Add(new Vector3(end, angle));
+                verts.Add(new Vector3(end.X, end.Y, angle));
 
                 // until we reach the correct distance down the curve
-                while (deltaLength >= Vector2.Distance(start, end))
+                while (deltaLength >= start.Distance(end))
                 {
                     end = GetPosition(t);
                     t += 0.00001f;

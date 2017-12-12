@@ -22,7 +22,7 @@
 
 using System;
 using FarseerPhysics.Dynamics;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Collision
 {

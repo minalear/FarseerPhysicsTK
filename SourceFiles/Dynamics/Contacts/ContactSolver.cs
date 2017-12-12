@@ -25,7 +25,7 @@ using System.Diagnostics;
 using FarseerPhysics.Collision;
 using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics.Common;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Dynamics.Contacts
 {
@@ -874,7 +874,7 @@ namespace FarseerPhysics.Dynamics.Contacts
                             normal = new Vector2(1.0f, 0.0f);
                             Vector2 pointA = MathUtils.Mul(ref xfA, manifold.LocalPoint);
                             Vector2 pointB = MathUtils.Mul(ref xfB, manifold.Points[0].LocalPoint);
-                            if (Vector2.DistanceSquared(pointA, pointB) > Settings.Epsilon * Settings.Epsilon)
+                            if (pointA.DistanceSquared(pointB) > Settings.Epsilon * Settings.Epsilon)
                             {
                                 normal = pointB - pointA;
                                 normal.Normalize();

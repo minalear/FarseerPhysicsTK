@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Common.TextureTools
 {
@@ -47,7 +47,7 @@ namespace FarseerPhysics.Common.TextureTools
         private bool _multipartDetection;
         private bool _pixelOffsetOptimization;
 
-        private Matrix _transform = Matrix.Identity;
+        private Matrix3 _transform = Matrix3.Identity;
 
         #region Properties
         /// <summary>
@@ -89,7 +89,7 @@ namespace FarseerPhysics.Common.TextureTools
         /// <summary>
         /// Can be used for scaling.
         /// </summary>
-        public Matrix Transform
+        public Matrix3 Transform
         {
             get { return _transform; }
             set { _transform = value; }
@@ -135,7 +135,7 @@ namespace FarseerPhysics.Common.TextureTools
         }
 
         public TextureConverter(byte? alphaTolerance, float? hullTolerance,
-            bool? holeDetection, bool? multipartDetection, bool? pixelOffsetOptimization, Matrix? transform)
+            bool? holeDetection, bool? multipartDetection, bool? pixelOffsetOptimization, Matrix3? transform)
         {
             Initialize(null, null, alphaTolerance, hullTolerance, holeDetection,
                 multipartDetection, pixelOffsetOptimization, transform);
@@ -148,7 +148,7 @@ namespace FarseerPhysics.Common.TextureTools
 
         public TextureConverter(uint[] data, int width, byte? alphaTolerance,
             float? hullTolerance, bool? holeDetection, bool? multipartDetection,
-            bool? pixelOffsetOptimization, Matrix? transform)
+            bool? pixelOffsetOptimization, Matrix3? transform)
         {
             Initialize(data, width, alphaTolerance, hullTolerance, holeDetection,
                 multipartDetection, pixelOffsetOptimization, transform);
@@ -158,7 +158,7 @@ namespace FarseerPhysics.Common.TextureTools
         #region Initialization
         private void Initialize(uint[] data, int? width, byte? alphaTolerance,
             float? hullTolerance, bool? holeDetection, bool? multipartDetection,
-            bool? pixelOffsetOptimization, Matrix? transform)
+            bool? pixelOffsetOptimization, Matrix3? transform)
         {
             if (data != null && !width.HasValue)
                 throw new ArgumentNullException("width", "'width' can't be null if 'data' is set.");
@@ -197,7 +197,7 @@ namespace FarseerPhysics.Common.TextureTools
             if (transform.HasValue)
                 Transform = transform.Value;
             else
-                Transform = Matrix.Identity;
+                Transform = Matrix3.Identity;
         }
         #endregion
 
@@ -405,7 +405,7 @@ namespace FarseerPhysics.Common.TextureTools
             if (PolygonDetectionType == VerticesDetectionType.Separated) // Only when VerticesDetectionType.Separated? -> Recheck.
                 ApplyTriangulationCompatibleWinding(ref detectedPolygons);
 
-            if (_transform != Matrix.Identity)
+            if (_transform != Matrix3.Identity)
                 ApplyTransform(ref detectedPolygons);
 
             return detectedPolygons;
@@ -632,7 +632,7 @@ namespace FarseerPhysics.Common.TextureTools
                 {
                     edgeVertex1 = polygon[i];
 
-                    if (LineTools.DistanceBetweenPointAndLineSegment(ref point, ref edgeVertex1, ref edgeVertex2) <= _hullTolerance || Vector2.Distance(point, edgeVertex1) <= _hullTolerance)
+                    if (LineTools.DistanceBetweenPointAndLineSegment(ref point, ref edgeVertex1, ref edgeVertex2) <= _hullTolerance || point.Distance(edgeVertex1) <= _hullTolerance)
                         return false;
 
                     edgeVertex2 = polygon[i];
@@ -895,7 +895,7 @@ namespace FarseerPhysics.Common.TextureTools
                         slope.Normalize();
 
                         Vector2 tempVector = polygon[nearestEdgeVertex1Index];
-                        distance = Vector2.Distance(tempVector, foundEdgeCoord);
+                        distance = tempVector.Distance(foundEdgeCoord);
 
                         vertex1Index = nearestEdgeVertex1Index;
                         vertex2Index = nearestEdgeVertex1Index + 1;

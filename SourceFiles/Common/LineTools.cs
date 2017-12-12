@@ -1,6 +1,6 @@
 ﻿using System;
 using FarseerPhysics.Collision;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Common
 {
@@ -13,20 +13,20 @@ namespace FarseerPhysics.Common
         public static float DistanceBetweenPointAndLineSegment(ref Vector2 point, ref Vector2 start, ref Vector2 end)
         {
             if (start == end)
-                return Vector2.Distance(point, start);
+                return point.Distance(start);
 
             Vector2 v = Vector2.Subtract(end, start);
             Vector2 w = Vector2.Subtract(point, start);
 
             float c1 = Vector2.Dot(w, v);
-            if (c1 <= 0) return Vector2.Distance(point, start);
+            if (c1 <= 0) return point.Distance(start);
 
             float c2 = Vector2.Dot(v, v);
-            if (c2 <= c1) return Vector2.Distance(point, end);
+            if (c2 <= c1) return point.Distance(end);
 
             float b = c1 / c2;
             Vector2 pointOnLine = Vector2.Add(start, Vector2.Multiply(v, b));
-            return Vector2.Distance(point, pointOnLine);
+            return point.Distance(pointOnLine);
         }
 
         // From Eric Jordan's convex decomposition library

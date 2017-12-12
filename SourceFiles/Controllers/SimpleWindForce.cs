@@ -1,5 +1,5 @@
 ﻿using FarseerPhysics.Dynamics;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Controllers
 {
@@ -54,7 +54,7 @@ namespace FarseerPhysics.Controllers
                     }
 
                     //TODO: Consider Divergence:
-                    //forceVector = Vector2.Transform(forceVector, Matrix.CreateRotationZ((MathHelper.Pi - MathHelper.Pi/2) * (float)Randomize.NextDouble()));
+                    //forceVector = Vector2.Transform(forceVector, Matrix3.CreateRotationZ((MathHelper.Pi - MathHelper.Pi/2) * (float)Randomize.NextDouble()));
 
                     // Calculate random Variation
                     if (Variation != 0)

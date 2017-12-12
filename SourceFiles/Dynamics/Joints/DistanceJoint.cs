@@ -23,7 +23,7 @@
 using System;
 using System.Diagnostics;
 using FarseerPhysics.Common;
-using Microsoft.Xna.Framework;
+using OpenTK;
 
 namespace FarseerPhysics.Dynamics.Joints
 {
@@ -208,7 +208,7 @@ namespace FarseerPhysics.Dynamics.Joints
             float crBu = MathUtils.Cross(_rB, _u);
             float invMass = _invMassA + _invIA * crAu * crAu + _invMassB + _invIB * crBu * crBu;
 
-            // Compute the effective mass matrix.
+            // Compute the effective mass Matrix3.
             _mass = invMass != 0.0f ? 1.0f / invMass : 0.0f;
 
             if (Frequency > 0.0f)
