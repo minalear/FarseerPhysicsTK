@@ -16,7 +16,7 @@ namespace ExampleTwo
         private int counter = 0;
 
         private World world;
-        private Body rocket;
+        private Body ball;
         private Body platform;
         private List<Body> boxes;
 
@@ -40,13 +40,13 @@ namespace ExampleTwo
             world = new World(new Vector2(0f, 9.8f));
             boxes = new List<Body>();
 
-            rocket = BodyFactory.CreateCapsule(world, 48f * pixelToUnit, 12f * pixelToUnit, 1f, new Vector2(400f, 225f));
-            rocket = BodyFactory.CreateCircle(world, 24f * pixelToUnit, 1f);
-            rocket.BodyType = BodyType.Dynamic;
-            rocket.Position = new Vector2(400f, 225f) * pixelToUnit;
-            rocket.FixedRotation = true;
+            ball = BodyFactory.CreateCapsule(world, 48f * pixelToUnit, 12f * pixelToUnit, 1f, new Vector2(400f, 225f));
+            ball = BodyFactory.CreateCircle(world, 24f * pixelToUnit, 1f);
+            ball.BodyType = BodyType.Dynamic;
+            ball.Position = new Vector2(400f, 225f) * pixelToUnit;
+            ball.FixedRotation = true;
 
-            rocketShape = ShapeConstructor.ConstructShapeFromBody(rocket);
+            rocketShape = ShapeConstructor.ConstructShapeFromBody(ball);
 
             platform = BodyFactory.CreateRectangle(world, 800f * pixelToUnit, 800f * pixelToUnit, 1f);
             platform.BodyType = BodyType.Static;
@@ -60,10 +60,10 @@ namespace ExampleTwo
             shapeRenderer.Begin();
 
             //Create matrix transforms based on the body's rotation and position
-            Vector2 rocketPosition = rocket.Position * unitToPixel;
+            Vector2 ballPosition = ball.Position * unitToPixel;
             shapeRenderer.SetTransform(
-                Matrix4.CreateRotationZ(rocket.Rotation) *
-                Matrix4.CreateTranslation(rocketPosition.X, rocketPosition.Y, 0f));
+                Matrix4.CreateRotationZ(ball.Rotation) *
+                Matrix4.CreateTranslation(ballPosition.X, ballPosition.Y, 0f));
             shapeRenderer.DrawShape(rocketShape, Color4.Black);
 
             shapeRenderer.ClearTransform();
@@ -90,9 +90,9 @@ namespace ExampleTwo
 
             //Apply thrust and movement
             if (gpadState.Buttons.B == ButtonState.Pressed)
-                rocket.ApplyForce(new Vector2(0f, -2.5f));
+                ball.ApplyForce(new Vector2(0f, -2.5f));
             if (gpadState.ThumbSticks.Left.LengthSquared > 0.01f)
-                rocket.ApplyForce(gpadState.ThumbSticks.Left * 1.5f);
+                ball.ApplyForce(gpadState.ThumbSticks.Left * 1.5f);
 
             //Spawn box
             if (gpadState.Buttons.X == ButtonState.Released && lastState.Buttons.X == ButtonState.Pressed)
