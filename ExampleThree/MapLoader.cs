@@ -17,9 +17,23 @@ namespace ExampleThree
             MapFile map = JsonConvert.DeserializeObject<MapFile>(File.ReadAllText(path));
             var geometry = new List<Shape>();
 
-            for (int i = 0; i < map.Layers[0].Objects.Length; i++)
+            int layerIndex = -1;
+            for (int i = 0; i < map.Layers.Length; i++)
             {
-                ObjectInfo obj = map.Layers[0].Objects[i];
+                if (map.Layers[i].Name == "Collision")
+                {
+                    layerIndex = i;
+                    break;
+                }
+            }
+
+            //Cannot find collision layer
+            if (layerIndex == -1)
+                throw new InvalidOperationException();
+
+            for (int i = 0; i < map.Layers[layerIndex].Objects.Length; i++)
+            {
+                ObjectInfo obj = map.Layers[layerIndex].Objects[i];
                 if (obj.Polygon == null) continue;
 
                 Vertices polygon = new Vertices(obj.Polygon.Length);
@@ -64,8 +78,8 @@ namespace ExampleThree
     {
         public string Name;
         public int ID;
-        public int X, Y;
-        public int Width, Height;
+        public float X, Y;
+        public float Width, Height;
         public Vector2[] Polygon;
     }
 }
