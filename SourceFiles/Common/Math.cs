@@ -29,6 +29,24 @@ namespace FarseerPhysics.Common
 {
     public static class MathUtils
     {
+        public static Vector2 CatmullRom(Vector2 value1, Vector2 value2, Vector2 value3, Vector2 value4, float amount)
+        {
+            return new Vector2(
+                CatmullRom(value1.X, value2.X, value3.X, value4.X, amount),
+                CatmullRom(value1.Y, value2.Y, value3.Y, value4.Y, amount));
+        }
+        public static float CatmullRom(float value1, float value2, float value3, float value4, float amount)
+        {
+            // Using formula from http://www.mvps.org/directx/articles/catmull/
+            // Internally using doubles not to lose precission
+            double amountSquared = amount * amount;
+            double amountCubed = amountSquared * amount;
+            return (float)(0.5 * (2.0 * value2 +
+                                 (value3 - value1) * amount +
+                                 (2.0 * value1 - 5.0 * value2 + 4.0 * value3 - value4) * amountSquared +
+                                 (3.0 * value2 - value1 - 3.0 * value3 + value4) * amountCubed));
+        }
+
         public static float Cross(ref Vector2 a, ref Vector2 b)
         {
             return a.X * b.Y - a.Y * b.X;
@@ -111,8 +129,8 @@ namespace FarseerPhysics.Common
         public static Vector2 Min(Vector2 value1, Vector2 value2)
         {
             return new Vector2(
-                MathHelper.Min(value1.X, value2.X),
-                MathHelper.Min(value1.Y, value2.Y));
+                Math.Min(value1.X, value2.X),
+                Math.Min(value1.Y, value2.Y));
         }
 
         // A^T * B

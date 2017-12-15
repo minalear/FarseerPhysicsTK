@@ -105,14 +105,14 @@ namespace FarseerPhysics.Factories
         public static Fixture AttachLineArc(float radians, int sides, float radius, bool closed, Body body)
         {
             Vertices arc = PolygonTools.CreateArc(radians, sides, radius);
-            arc.Rotate((OpenTK.MathHelper.Pi - radians) / 2);
+            arc.Rotate((MathHelper.Pi - radians) / 2);
             return closed ? AttachLoopShape(arc, body) : AttachChainShape(arc, body);
         }
 
         public static List<Fixture> AttachSolidArc(float density, float radians, int sides, float radius, Body body)
         {
             Vertices arc = PolygonTools.CreateArc(radians, sides, radius);
-            arc.Rotate((OpenTK.MathHelper.Pi - radians) / 2);
+            arc.Rotate((MathHelper.Pi - radians) / 2);
 
             //Close the arc
             arc.Add(arc[0]);

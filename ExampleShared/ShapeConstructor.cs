@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Collision.Shapes;
+using OpenTK;
 
 namespace ExampleShared
 {
